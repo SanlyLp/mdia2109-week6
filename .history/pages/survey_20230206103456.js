@@ -1,0 +1,39 @@
+import { useState } from "react"
+import Start from "./Start"
+
+
+export default function Survey() {
+    const [name, setName] = useState('') /*we want to store someones name*/
+    const [isActiveOne, setIsActiveOne] = useState(true);
+    const [isActiveTwo, setIsActiveTwo] = useState(false);
+
+    const passName = (event) => {
+        if (event.key === "Enter") {
+            console.log("Enter")
+            setIsActiveOne(false);
+            setIsActiveTwo(true);
+        }
+    }
+    return (
+
+        <div>
+            <div style={{ display: isActiveOne ? "block" : "none" }}> /*block shows on desktop
+             and none means nothing will */
+                <h1>What is your name?</h1>
+                <input /*information*/
+                    value={name}
+                    onChange={event => setName(event.target.value)}
+                    placeholder="Enter name"
+                    onKeyDown={passName}
+                    type="text"
+                />
+
+            </div>
+            <div style={{ display: isActiveTwo ? "block" : "none" }}>
+                <Start passName={name} />
+
+            </div>
+        </div>
+
+    )
+}
